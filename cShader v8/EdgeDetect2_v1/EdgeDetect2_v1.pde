@@ -2,8 +2,8 @@
 cShader cs;
 void setup() {
   size(400, 400, P2D);
-  String op = "/*/";
-  cs = new cShader(500000,3,op);
+  String op = "/*/+";
+  cs = new cShader(500000,4,op);
   cs.lodRandom2();
   //smooth(8);
 };
@@ -13,6 +13,7 @@ float con = 0;
 
 void draw() {
   background(255);
+  cs.runV();
   //cs.runDV();//with debug info
   //cs.runDF();//with debug info
   //cs.runVF();//without

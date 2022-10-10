@@ -177,6 +177,7 @@ void runVF() {
 };
 
 void runVrs() {
+  println(vv,i,vb,imgsb.size());
   for(int i=0;i<vars;i++){
     String vv = "va"+i;
     String vb = "vb"+i;
@@ -203,6 +204,35 @@ void runVrs() {
   c2.image(imgb.get(0), 0, 0);
   c2.endDraw();
   recombineS(c1, c2);
+};
+
+void runVrsD() {
+  for(int i=0;i<vars;i++){
+    String vv = "va"+i;
+    String vb = "vb"+i;
+    //println(vv,i,vb,imgss.size());
+    s.set(shdrk[i], imga.get(i));
+    s.set(shdrk[i+1], imgb.get(i));
+    s1.set(shdrk[i], imga.get(i));
+    s1.set(shdrk[i+1], imgb.get(i));
+  }
+  c1.beginDraw();
+  c1.clear();
+  c1.background(0, 0, 0, 0);
+  
+  c1.shader(s);
+  c1.image(imga.get(0), 0, 0);
+  c1.endDraw();
+
+  //x float component
+  c2.beginDraw();
+  c2.clear();
+  c2.background(0, 0, 0, 0);
+  
+  c2.shader(s1);
+  c2.image(imgb.get(0), 0, 0);
+  c2.endDraw();
+  recombineSD(c1, c2);
 };
 
 void run() {
@@ -360,6 +390,50 @@ void recombine(PGraphics a, PGraphics b) {
 };
 
 void recombineS(PGraphics a, PGraphics b) {
+  a.loadPixels();
+  b.loadPixels();
+  float b1 = 256*256;
+  float b2 = 256;
+  for (int i=0; i<objects; i++) {
+    //println("recombine",i);
+     color r1 = color(a.pixels[i]);
+     //int r1 = (imga.get(0).pixels[i]);
+     float r1a = alpha((a.pixels[i]));
+     float r2 = r1;
+     float r3 = red(r1);
+     float g3 = green(r1);
+     float b3 = blue(r1);
+     if((r1a)<255)
+     //r2 = (r3*b1+g3*b2+b);
+     r2 = (r1+2147483648L);
+     else r2 = r1+16777216;
+     //float t = b.pixels[i]+16777216;
+     //float r = red(b.pixels[i]);
+     //float g = green(b.pixels[i]);
+     float t = b.pixels[i]+16777216;
+     float r = red(r1);
+     float g = green(r1);
+     float b4 = blue(r1);
+     
+
+
+    if (r==0)t=t*pow(10, -1-2);
+    else if (g==0)t=t*pow(10, -2-2);
+    else t=t*pow(10, -3-2);
+    //while (t>0) t=t*pow(10,-1);
+
+    //num[i] = r1*(255/r1a);
+    num[i] = r2;
+    if((r1a)<200)num[i] = r2/65793;
+      
+    imga.get(0).pixels[i] = float2PixelsA(r1);
+    imgb.get(0).pixels[i] = float2PixelsB(t);
+  }
+  //imga.set(0,c1);
+  //imgb.set(0,c2);
+};
+
+void recombineSD(PGraphics a, PGraphics b) {
   a.loadPixels();
   b.loadPixels();
   float b1 = 256*256;
