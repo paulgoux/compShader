@@ -383,11 +383,24 @@ void recombineS(PGraphics a, PGraphics b) {
      float b3 = alpha(r2);
 
 
-    if (r==0)t=t*pow(10, -1-2);
-    else if (g==0)t=t*pow(10, -2-2);
-    else t=t*pow(10, -3-2);
-    //while (t>0) t=t*pow(10,-1);
-
+    //if (r==0)t=t*pow(10, -1-2);
+    //if (g==0)t=t*pow(10, -2);
+    //else t=t*pow(10, -3);
+    //if(i==0)println("t",t);
+    //while (t<0) {
+    //  t=t*pow(10,+1);
+    //  //println("t",t);
+    //}
+    
+    while (1/t<1){
+      //if(i==0)println("t1",t);
+      t=t*pow(10,-1);
+      //if(t<0)break;
+      //if(i==0)println("t2",t);
+    }
+    //if (r==0)t=t*pow(10, -1);
+    //if (g==0)t=t*pow(10, -1);
+    
     //num[i] = r1*(255/r1a);
     num[i] = r1+t;
     if(red(t1)==255)num[i] = - num[i];

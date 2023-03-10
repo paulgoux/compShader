@@ -31,8 +31,8 @@ void setup() {
   num = new float[max];
   //initVectors();
   //numToF();
-  String op = "*-";
-  cs = new cShader(50000,2,op);
+  String op = "/-";
+  cs = new cShader(5000,2,op);
   
   //cs.createshader(1,
   //String[]text = new String[10000000];

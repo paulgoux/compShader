@@ -87,7 +87,7 @@ class writeShader {
     String [] sk = null;
     if(!k){
       sk = new String[1];
-      sk[0] = "float numf = abs(num - int(num))*100000 ;";
+      sk[0] = "float numf = abs(num - floor(num))*10000 ;";
       //ddition
       //sk[1] = " if(numf/1000.0>1.0)numf = (numf/10.0) ;";
       //sk[1] = "numf = numf/10.0;";
@@ -96,8 +96,8 @@ class writeShader {
     }
     else  {
       sk = new String[2];
-      sk[0] = "float numf = int(num);";
-      sk[1] = "if(num<0.0) numf = -int(num);";
+      sk[0] = "float numf = floor(num);";
+      sk[1] = "if(num<0.0) numf = -floor(num);";
     }
     println(sk[0]);
     ss.add(sk);
